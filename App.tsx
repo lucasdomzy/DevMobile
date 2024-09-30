@@ -1,70 +1,67 @@
-import * as React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { View, Text, Button } from 'react-native';
 
 const Stack = createStackNavigator();
 
-type Props = {
-  navigation: any
-}
-
-// Tela Home Principal
-function HomeScreen ({ navigation } : Props){
-  return(
-    <View style ={{
-      flex:1,
-      backgroundColor:'pink',
-      justifyContent:'center',
-      alignItems:'center',
-    }}>
-      <Text style = {{color:'yellow'}}>
-        Yamelyin
-      </Text>
+const HomeScreen = ({ navigation }) => {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Bem-vindo ao meu Portfólio!</Text>
       <Button
-        title='Próximo doidão'
-        onPress={() => navigation.navigate('Tela2')}
+        title="Ver Contatos"
+        onPress={() => navigation.navigate('Contatos')}
+      />
+      <Button
+        title="Ver Habilidades"
+        onPress={() => navigation.navigate('Habilidades')}
       />
     </View>
   );
-}
+};
 
-// Próxima tela
-
-function Tela2 ({ navigation } : Props){
-  return(
-    <View style ={{
-      flex:1,
-      backgroundColor:'blue',
-      justifyContent:'center',
-      alignItems:'center',
-    }}>
-      <Text style = {{
-        color:'white'
-      }}>
-        Yzmod
-      </Text>
-      <Button
-        title='Voltar pro doidão anterior'
-        onPress={() => navigation.navigate('Home')}
-      />
-
+const ContatosScreen = () => {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Meus Contatos</Text>
+      <Text>LinkedIn: <Text style={{ color: 'blue' }}>linkedin.com/in/seu-perfil</Text></Text>
+      <Text>GitHub: <Text style={{ color: 'blue' }}>github.com/seu-usuario</Text></Text>
     </View>
-  )
-}
+  );
+};
 
-// Configurando as rotas no Stack Navigator
+const HabilidadesScreen = () => {
+  const skills = [
+    { name: 'JavaScript', level: 5 },
+    { name: 'React Native', level: 4 },
+    { name: 'Node.js', level: 3 },
+    { name: 'Python', level: 2 },
+    { name: 'Git', level: 4 },
+  ];
 
-function App(){
-  return(
+  return (
+    <View style={{ flex: 1, padding: 20 }}>
+      <Text>Minhas Habilidades</Text>
+      {skills.map((skill) => (
+        <View key={skill.name} style={{ marginVertical: 10 }}>
+          <Text>{skill.name}: {'⭐'.repeat(skill.level)}{'☆'.repeat(5 - skill.level)}</Text>
+        </View>
+      ))}
+    </View>
+  );
+};
+
+const App = () => {
+  return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name='Home' component={HomeScreen}/>
-        <Stack.Screen name='Tela2' component={Tela2}/>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Contatos" component={ContatosScreen} />
+        <Stack.Screen name="Habilidades" component={HabilidadesScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 export default App;
