@@ -1,25 +1,48 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text, Button } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const Stack = createStackNavigator();
 
 const HomeScreen = ({ navigation }) => {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={styles.container}>
       <Text>Bem-vindo ao meu Portfólio!</Text>
-      <Button
-        title="Ver Contatos"
+      <TouchableOpacity
+        style={[styles.button, { backgroundColor: '#007BFF' }]} // Cor do botão
         onPress={() => navigation.navigate('Contatos')}
-      />
-      <Button
-        title="Ver Habilidades"
+      >
+        <Text style={styles.buttonText}>Ver Contatos</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.button, { backgroundColor: '#28A745' }]} // Outra cor para o segundo botão
         onPress={() => navigation.navigate('Habilidades')}
-      />
+      >
+        <Text style={styles.buttonText}>Ver Habilidades</Text>
+      </TouchableOpacity>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    padding: 10,
+    borderRadius: 5,
+    marginVertical: 10,
+    width: '80%', // Largura do botão
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    textAlign: 'center', // Centraliza o texto
+  },
+});
 
 const ContatosScreen = () => {
   return (
